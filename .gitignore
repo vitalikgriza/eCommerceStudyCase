@@ -33,3 +33,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+/.idea/copilot/chatSessions/xd.lck
+/.idea/workspace.xml
+/.idea/copilot/chatSessions/blobs/version
