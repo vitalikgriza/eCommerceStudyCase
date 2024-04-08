@@ -41,3 +41,5 @@ yarn-error.*
 /.idea/jsLinters/eslint.xml
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/codeStyles/Project.xml
+/.idea/git_toolbox_prj.xml
+/.idea/vcs.xml
