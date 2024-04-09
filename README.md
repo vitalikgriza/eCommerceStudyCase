@@ -7,5 +7,5 @@ App backend is a simple REST API that provides the products and the orders built
 
 - React Native
 - Expo
-- react-navigation
+- expo-router
 - Redux

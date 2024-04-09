@@ -1,8 +1,10 @@
+import { Link } from 'expo-router';
 import React, { memo } from 'react';
-import { StyleSheet, Image, Pressable } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
 interface ItemCardProps {
   imageUrl: string;
+  id: string;
 }
 
 const styles = StyleSheet.create({
@@ -15,11 +17,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ItemCard = memo(({ imageUrl }: ItemCardProps) => {
+const ItemCard = memo(({ imageUrl, id }: ItemCardProps) => {
   return (
-    <Pressable style={styles.container}>
+    <Link href={`/product/${id}`} style={styles.container}>
       <Image source={{ uri: imageUrl }} style={styles.img} />
-    </Pressable>
+    </Link>
   );
 });
 
