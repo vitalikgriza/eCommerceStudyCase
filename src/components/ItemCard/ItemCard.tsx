@@ -1,10 +1,8 @@
-import React from 'react';
-import { View, StyleSheet, Image, Pressable } from 'react-native';
-
-import { Product } from '@/types';
+import React, { memo } from 'react';
+import { StyleSheet, Image, Pressable } from 'react-native';
 
 interface ItemCardProps {
-  product: Product;
+  imageUrl: string;
 }
 
 const styles = StyleSheet.create({
@@ -17,12 +15,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const ItemCard = ({ product }: ItemCardProps) => {
+const ItemCard = memo(({ imageUrl }: ItemCardProps) => {
   return (
     <Pressable style={styles.container}>
-      <Image source={{ uri: product.image }} style={styles.img} />
+      <Image source={{ uri: imageUrl }} style={styles.img} />
     </Pressable>
   );
-};
+});
 
 export default ItemCard;

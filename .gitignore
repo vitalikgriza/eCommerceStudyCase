@@ -33,13 +33,4 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-/.idea/copilot/chatSessions/xd.lck
-/.idea/workspace.xml
-/.idea/copilot/chatSessions/blobs/version
-/.idea/codeStyles/codeStyleConfig.xml
-/.idea/prettier.xml
-/.idea/jsLinters/eslint.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/codeStyles/Project.xml
-/.idea/git_toolbox_prj.xml
-/.idea/vcs.xml
+/.idea
