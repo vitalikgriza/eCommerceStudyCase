@@ -2,15 +2,15 @@ import React from 'react';
 import { FlatList, View, Image, useWindowDimensions, Text, ScrollView } from 'react-native';
 
 import FloatingButton from '@/components/FloatingButton/FloatingButton';
+import { useAppSelector } from '@/hooks';
 import styles from '@/screens/ProductDetails/styles';
-import { Product } from '@/types';
 
-interface ProductDetailsProps {
-  product: Product;
-}
-
-const ProductDetails = ({ product }: ProductDetailsProps) => {
+const ProductDetails = () => {
   const { width } = useWindowDimensions();
+  const product = useAppSelector(state => state.products.selectedProduct);
+  if (!product) {
+    return <Text style={{ textAlign: 'center', marginTop: 32 }}>Product not found</Text>;
+  }
   const { name, price, images, description } = product;
 
   return (

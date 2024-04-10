@@ -1,9 +1,12 @@
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import React, { memo } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
+
+import { useAppDispatch } from '@/hooks';
+import { setSelectedProduct } from '@/store/products/products.slice';
 
 interface ItemCardProps {
-  imageUrl: string;
+  imageUrl?: string;
   id: string;
 }
 
@@ -18,10 +21,16 @@ const styles = StyleSheet.create({
 });
 
 const ItemCard = memo(({ imageUrl, id }: ItemCardProps) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const onPress = () => {
+    dispatch(setSelectedProduct(id));
+    router.push(`/product/${id}`);
+  };
   return (
-    <Link href={`/product/${id}`} style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
       <Image source={{ uri: imageUrl }} style={styles.img} />
-    </Link>
+    </Pressable>
   );
 });
 
