@@ -12,7 +12,7 @@ const ShoppingCart = () => {
       <FlatList
         data={cart}
         renderItem={({ item }) => <CartItem item={item} />}
-        contentContainerStyle={{ gap: 8, paddingBottom: 100 }}
+        contentContainerStyle={{ paddingBottom: 100 }}
         ListFooterComponent={ShoppingCartSummary}
       />
       <FloatingButton title="Checkout" onPress={() => {}} />
