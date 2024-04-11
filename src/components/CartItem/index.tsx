@@ -33,7 +33,7 @@ const CartItem = ({ item }: CartItemProps) => {
           <Feather onPress={decreaseQuantity} name="minus-circle" size={24} color="gray" />
           <Text style={styles.quantity}>{item.quantity}</Text>
           <Feather onPress={increaseQuantity} name="plus-circle" size={24} color="gray" />
-          <Text style={styles.itemTotal}>$320.0</Text>
+          <Text style={styles.itemTotal}>{item.product.price * item.quantity}</Text>
         </View>
       </View>
     </View>

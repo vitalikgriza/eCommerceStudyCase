@@ -11,7 +11,7 @@ type CartSliceState = {
 
 const initialState: CartSliceState = {
   items: cart,
-  deliveryFee: 0,
+  deliveryFee: 15,
   freeDeliveryFrom: 200,
 };
 

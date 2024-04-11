@@ -5,12 +5,15 @@ import { Pressable, Text } from 'react-native';
 
 import styles from './styles';
 
+import { useCartItemsSize } from '@/store/cart/cart.selectors';
+
 const HeaderCartButton = () => {
+  const cartItemsNumber = useCartItemsSize();
   return (
     <Link href="/shopping-cart" asChild>
       <Pressable style={styles.flexRow}>
         <FontAwesome5 name="shopping-cart" size={18} color="gray" />
-        <Text style={styles.badge}>1</Text>
+        {cartItemsNumber > 0 && <Text style={styles.badge}>{cartItemsNumber}</Text>}
       </Pressable>
     </Link>
   );
