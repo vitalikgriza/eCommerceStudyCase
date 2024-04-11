@@ -7,3 +7,9 @@ export type Product = {
   images?: string[];
   sizes: number[];
 };
+
+export type CartItem = {
+  product: Pick<Product, 'id' | 'name' | 'price' | 'image'>;
+  size: number;
+  quantity: number;
+};

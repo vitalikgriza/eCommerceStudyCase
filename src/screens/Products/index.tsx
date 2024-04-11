@@ -2,10 +2,10 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import ItemCard from '@/components/ItemCard/ItemCard';
-import { useAppSelector } from '@/hooks';
+import { useProducts } from '@/store/products/products.selectors';
 
 const Products = () => {
-  const products = useAppSelector(state => state.products.products);
+  const products = useProducts();
 
   return (
     <FlatList

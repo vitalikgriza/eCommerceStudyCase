@@ -1,13 +1,18 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, View, Image, useWindowDimensions, Text, ScrollView } from 'react-native';
 
 import FloatingButton from '@/components/FloatingButton/FloatingButton';
-import { useAppSelector } from '@/hooks';
+import { useAppDispatch } from '@/hooks';
 import styles from '@/screens/ProductDetails/styles';
+import { addCartItem } from '@/store/cart/cart.slice';
+import { useSelectedProduct } from '@/store/products/products.selectors';
 
 const ProductDetails = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const { width } = useWindowDimensions();
-  const product = useAppSelector(state => state.products.selectedProduct);
+  const product = useSelectedProduct();
   if (!product) {
     return <Text style={{ textAlign: 'center', marginTop: 32 }}>Product not found</Text>;
   }
@@ -35,7 +40,8 @@ const ProductDetails = () => {
       <FloatingButton
         title="Add to card"
         onPress={() => {
-          console.log('press add to cart');
+          dispatch(addCartItem({ product }));
+          router.back();
         }}
       />
     </View>

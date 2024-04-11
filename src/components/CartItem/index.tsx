@@ -3,21 +3,24 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import styles from './styles';
+
+import { useAppDispatch } from '@/hooks';
+import { changeQuantity } from '@/store/cart/cart.slice';
+import { CartItem as CartItemType } from '@/types';
+
 interface CartItemProps {
-  item: {
-    product: {
-      image: string;
-      name: string;
-    };
-    size: string;
-    quantity: number;
-  };
+  item: CartItemType;
 }
 
 const CartItem = ({ item }: CartItemProps) => {
-  const increaseQuantity = () => {};
+  const dispatch = useAppDispatch();
+  const increaseQuantity = () => {
+    dispatch(changeQuantity({ id: item.product.id, amount: 1 }));
+  };
 
-  const decreaseQuantity = () => {};
+  const decreaseQuantity = () => {
+    dispatch(changeQuantity({ id: item.product.id, amount: -1 }));
+  };
 
   return (
     <View style={styles.container}>
@@ -27,9 +30,9 @@ const CartItem = ({ item }: CartItemProps) => {
         <Text style={styles.size}>Size {item.size}</Text>
 
         <View style={styles.footer}>
-          <Feather onPress={increaseQuantity} name="minus-circle" size={24} color="gray" />
+          <Feather onPress={decreaseQuantity} name="minus-circle" size={24} color="gray" />
           <Text style={styles.quantity}>{item.quantity}</Text>
-          <Feather onPress={decreaseQuantity} name="plus-circle" size={24} color="gray" />
+          <Feather onPress={increaseQuantity} name="plus-circle" size={24} color="gray" />
           <Text style={styles.itemTotal}>$320.0</Text>
         </View>
       </View>
