@@ -1,0 +1,23 @@
+{
+  "name": "eCommerceStudyCaseBackend",
+  "version": "1.0.0",
+  "description": "Nodejs with Express using MongoDB",
+  "main": "index.ts",
+  "author": "vitalikgriza",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  }
+}
