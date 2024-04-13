@@ -20,7 +20,10 @@ const ProductDetails = () => {
 
   return (
     <View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewOffset}
+        showsVerticalScrollIndicator={false}
+      >
         <FlatList
           data={images || []}
           renderItem={({ item: uri }) => (
