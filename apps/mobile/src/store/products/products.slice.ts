@@ -1,4 +1,4 @@
-import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import products from '@/data/products';
 import { Product } from '@/types';
