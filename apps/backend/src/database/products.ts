@@ -6,7 +6,7 @@ const getAllProducts = async () => {
 };
 
 const getProductById = async (id: string) => {
-  return getDB().products.findOne({ _id: new ObjectId() });
+  return getDB().products.findOne({ _id: new ObjectId(id) });
 };
 
 export {
