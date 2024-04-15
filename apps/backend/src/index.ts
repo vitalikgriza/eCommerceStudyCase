@@ -1,13 +1,18 @@
-require('dotenv').config();
-const express = require('express');
-const productsRoutes = require('./router/products');
+import 'dotenv/config'
+import express, { Express, Request, Response } from 'express';
+import productsRoutes from './router/products';
+import ordersRoutes from './router/orders';
+import { PORT } from './constants';
 
-const app = express();
+const app: Express = express();
 
 app.use('/products', productsRoutes);
-app.get('/', (req: any, res: any) => {
+app.use('/orders', ordersRoutes);
+
+app.get('/', (req: Request, res: Response) => {
   res.send('<h2>Hello world </h2>');
 });
-app.listen(3000, () => {
+
+app.listen(PORT, () => {
   console.log('Server is running on port 3000');
 });

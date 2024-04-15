@@ -1,17 +1,10 @@
-const { Router } = require('express');
-const { products_all_get } = require('../controller/productsController');
+import { Router } from 'express';
+import { products_all_get, product_by_id_get } from '../controller/productsController';
 
 const router = Router();
 
 router.get('/', products_all_get);
 
-//
-// router.get('/:productId', (req, res) => {
-//   res.json({
-//     id: req.params.id,
-//     title: 'Product 1',
-//     description: 'This is product 1',
-//   });
-// });
+router.get('/:id', product_by_id_get);
 
-module.exports = router;
+export default router;

@@ -1,9 +1,14 @@
-const MongoClient = require('mongodb').MongoClient;
-const client = new MongoClient(process.env.MONGODB_URI);
+import { MongoClient } from 'mongodb';
 
-const db = client.db('ecommerce');
-const products = db.collection('products');
+const client = new MongoClient(process.env.MONGODB_URI || '');
 
-module.exports = {
-  products,
+const getDB = () => {
+  const db= client.db('ecommerce');
+  const products = db.collection('products');
+  const orders = db.collection('orders');
+  return { products, orders };
 }
+
+
+
+export { getDB };

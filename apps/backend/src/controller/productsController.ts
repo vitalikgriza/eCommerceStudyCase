@@ -1,11 +1,26 @@
-const productsService = require('../database/products');
+import { Response, Request } from 'express';
+import { getAllProducts, getProductById } from '../database/products';
 
-exports.products_all_get= async (req: any, res: any) => {
+export const products_all_get= async (req: Request, res: Response) => {
     try {
-        const products = await productsService.getAllProducts();
-        await res.send({ status: "OK", data: products });
+        const products = await getAllProducts();
+        res.send({ status: "OK", data: products });
     }
     catch (error: any) {
         res.status(500).json({ message: error.message });
+    }
+}
+
+export const product_by_id_get = async (req: Request, res: Response) => {
+    try {
+        const product = await getProductById(req.params.id);
+        if (!product) {
+            res.status(404).json({ status: "FAILED", error: 'Product not found' });
+            return;
+        }
+        res.send({ status: "OK", data: product });
+    }
+    catch (error: any) {
+        res.status(401).json({ status: "FAILED", error: error.message });
     }
 }
