@@ -1,19 +1,33 @@
-import { useRouter } from 'expo-router';
+import { skipToken } from '@reduxjs/toolkit/query';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { FlatList, View, Image, useWindowDimensions, Text, ScrollView } from 'react-native';
+import {
+  FlatList,
+  View,
+  Image,
+  useWindowDimensions,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 
+import { useGetProductQuery } from '@/api';
 import FloatingButton from '@/components/FloatingButton/FloatingButton';
 import { useAppDispatch } from '@/hooks';
 import styles from '@/screens/ProductDetails/styles';
 import { addCartItem } from '@/store/cart/cart.slice';
-import { useSelectedProduct } from '@/store/products/products.selectors';
 
 const ProductDetails = () => {
   const dispatch = useAppDispatch();
+  const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { width } = useWindowDimensions();
-  const product = useSelectedProduct();
-  if (!product) {
+  const { data: product, isLoading, error } = useGetProductQuery(id ?? skipToken);
+  if (isLoading) {
+    return <ActivityIndicator style={{ marginTop: 32 }} />;
+  }
+
+  if (!product || error) {
     return <Text style={{ textAlign: 'center', marginTop: 32 }}>Product not found</Text>;
   }
   const { name, price, images, description } = product;

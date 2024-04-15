@@ -15,11 +15,11 @@ interface CartItemProps {
 const CartItem = ({ item }: CartItemProps) => {
   const dispatch = useAppDispatch();
   const increaseQuantity = () => {
-    dispatch(changeQuantity({ id: item.product.id, amount: 1 }));
+    dispatch(changeQuantity({ id: item.product._id, amount: 1 }));
   };
 
   const decreaseQuantity = () => {
-    dispatch(changeQuantity({ id: item.product.id, amount: -1 }));
+    dispatch(changeQuantity({ id: item.product._id, amount: -1 }));
   };
 
   return (

@@ -1,17 +1,21 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 
+import { useGetProductsQuery } from '@/api';
 import ItemCard from '@/components/ItemCard/ItemCard';
-import { useProducts } from '@/store/products/products.selectors';
 
 const Products = () => {
-  const products = useProducts();
+  const { data, isLoading } = useGetProductsQuery();
+
+  if (isLoading) {
+    return <ActivityIndicator style={{ marginTop: 32 }} />;
+  }
 
   return (
     <FlatList
-      data={products}
-      renderItem={({ item: product }) => <ItemCard id={product.id} imageUrl={product.image} />}
-      keyExtractor={product => product.id}
+      data={data || []}
+      renderItem={({ item: product }) => <ItemCard id={product._id} imageUrl={product.image} />}
+      keyExtractor={product => product._id}
       numColumns={2}
       columnWrapperStyle={{ gap: 4 }}
       contentContainerStyle={{ gap: 4 }}
