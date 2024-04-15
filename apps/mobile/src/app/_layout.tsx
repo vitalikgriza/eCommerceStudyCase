@@ -7,14 +7,14 @@ import { store } from '@/store';
 
 const AppLayout = () => {
   return (
-    <Provider store={store}>
-      <RootSiblingParent>
+    <RootSiblingParent>
+      <Provider store={store}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(main)" />
           <Stack.Screen name="sign-in" />
         </Stack>
-      </RootSiblingParent>
-    </Provider>
+      </Provider>
+    </RootSiblingParent>
   );
 };
 
