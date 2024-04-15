@@ -3,9 +3,11 @@ import express, { Express, Request, Response } from 'express';
 import productsRoutes from './router/products';
 import ordersRoutes from './router/orders';
 import { PORT } from './constants';
+import bodyParser from 'body-parser';
 
 const app: Express = express();
 
+app.use(bodyParser.json());
 app.use('/products', productsRoutes);
 app.use('/orders', ordersRoutes);
 
