@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, FlatList } from 'react-native';
 
 import { useGetUserOrdersQuery } from '@/api';
+import OrderCard from '@/components/OrderCard';
 
 const Orders = () => {
   const { data: orders } = useGetUserOrdersQuery();
@@ -11,13 +12,12 @@ const Orders = () => {
   }
 
   return (
-    <View>
-      {orders.map(order => (
-        <View key={order.referenceNumber}>
-          <Text>{order.referenceNumber}</Text>
-        </View>
-      ))}
-    </View>
+    <FlatList
+      data={orders}
+      keyExtractor={order => order.referenceNumber}
+      renderItem={({ item }) => <OrderCard order={item} />}
+      contentContainerStyle={{ padding: 16, gap: 8 }}
+    />
   );
 };
 

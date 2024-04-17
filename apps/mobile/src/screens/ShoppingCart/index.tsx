@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, Text, StyleSheet } from 'react-native';
 import Toast from 'react-native-root-toast';
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
 
 const ShoppingCart = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const cartItems = useShoppingCartItems();
   const [createOrder] = useCreateOrderMutation();
   const subTotal = useCartSubTotal();
@@ -26,18 +28,17 @@ const ShoppingCart = () => {
   }
 
   const onCheckout = () => {
-    console.log('onCheckout', Toast);
     createOrder({
-      items: cartItems.map(item => item.product._id),
+      items: cartItems,
       subtotal: subTotal,
       deliveryFee,
       total: subTotal + deliveryFee,
     });
     Toast.show('Order created successfully', {
       duration: Toast.durations.LONG,
-      position: 116,
     });
     dispatch(clearCart());
+    router.back();
   };
 
   return (

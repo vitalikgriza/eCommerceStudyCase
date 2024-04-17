@@ -42,6 +42,7 @@ export const api = createApi({
     }
     return result;
   },
+  tagTypes: ['Product', 'Order'],
   endpoints: build => ({
     login: build.mutation<string | null, { email: string; password: string }>({
       query: ({ email, password }) => ({
@@ -49,10 +50,11 @@ export const api = createApi({
         method: 'POST',
         body: { email, password },
       }),
-      transformResponse: (response, meta, arg) => meta?.response?.headers.get('auth-token') || null,
+      transformResponse: (response, meta) => meta?.response?.headers.get('auth-token') || null,
     }),
     getProducts: build.query<Product[], void>({
       query: () => 'products',
+      providesTags: ['Product'],
     }),
     getProduct: build.query<Product, string>({
       query: (id: string) => `products/${id}`,
@@ -65,9 +67,11 @@ export const api = createApi({
           body: newOrder,
         };
       },
+      invalidatesTags: ['Order'],
     }),
     getUserOrders: build.query<Order[], void>({
       query: () => 'orders',
+      providesTags: ['Order'],
     }),
   }),
 });

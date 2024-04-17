@@ -15,7 +15,7 @@ export type CartItem = {
 };
 
 export type Order = {
-  items: string[];
+  items: CartItem[];
   total: number;
   referenceNumber: string;
   deliveryFee: number;

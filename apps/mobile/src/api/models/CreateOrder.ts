@@ -1,7 +1,7 @@
-import { Product } from '@/types';
+import { CartItem } from '@/types';
 
 export interface CreateOrder {
-  items: Product['_id'][];
+  items: CartItem[];
   subtotal: number;
   deliveryFee: number;
   total: number;
