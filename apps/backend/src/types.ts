@@ -11,3 +11,21 @@ export type IResponse<D = void> = Response<{
   data?: D;
   error?: string;
 }>;
+
+export type Product = {
+  name: string;
+  price: number;
+  description?: string;
+  image?: string;
+  images?: string[];
+  sizes: number[];
+}
+
+export type Order = {
+  items: string[];
+  userId: string;
+  total: number;
+  referenceNumber: string;
+  deliveryFee: number;
+  subtotal: number;
+}

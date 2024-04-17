@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
-import { createOrder, getOrder } from '../database/orders';
+import { createOrder, getUserOrders } from '../database/orders';
 
 const router = Router();
 router.get('/:id', async (req: Request<{ id: string }>, res: Response) => {
   try {
-    const order = await getOrder(req.params.id);
+    const order = await getUserOrders(req.params.id, req.headers.userId as string);
     if (!order) {
       res.status(404).json({ status: "FAILED", error: 'Order not found' });
       return;
@@ -19,7 +19,7 @@ router.get('/:id', async (req: Request<{ id: string }>, res: Response) => {
 router.post('/createOrder', async (req: Request, res: Response) => {
   try {
     const referenceNumber = (Math.random() + 1).toString(36).substring(7);
-    const order = await createOrder({ ...req.body, referenceNumber });
+    await createOrder({ ...req.body, referenceNumber, userId: req.headers.userId as string });
     res.json({ status: "OK", data: referenceNumber });
   }
   catch (error: any) {
