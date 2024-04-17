@@ -1,7 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 
-import { authService } from '@/auth/AuthService';
 import { useAppDispatch } from '@/hooks';
 import { logoutAction } from '@/store/auth/auth.actions';
 
