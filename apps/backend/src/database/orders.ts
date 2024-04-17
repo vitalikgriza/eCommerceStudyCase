@@ -1,11 +1,11 @@
-import { getDB } from './db';
+import { orders } from './db';
 
 const getOrder = async (ref: string) => {
-  return getDB().orders.findOne({ referenceNumber: ref });
+  return orders().findOne({ referenceNumber: ref });
 }
 
 const createOrder = async (order: any) => {
-  const result = await getDB().orders.insertOne(order);
+  const result = await orders().insertOne(order);
   if (!result) {
     throw new Error('Failed to create order');
   }

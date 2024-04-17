@@ -1,14 +1,9 @@
 import { MongoClient } from 'mongodb';
 
 const client = new MongoClient(process.env.MONGODB_URI || '');
+const db= client.db('ecommerce');
 
-const getDB = () => {
-  const db= client.db('ecommerce');
-  const products = db.collection('products');
-  const orders = db.collection('orders');
-  return { products, orders };
-}
+export const users = () => db.collection('users');
+export const products = () => db.collection('products');
+export const orders = () => db.collection('orders');
 
-
-
-export { getDB };

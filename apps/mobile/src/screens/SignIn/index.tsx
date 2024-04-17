@@ -16,8 +16,12 @@ const SignIn = () => {
     try {
       await dispatch(loginAction({ email, password })).unwrap();
       router.replace('products');
-    } catch (e) {
-      // setError(e.data);
+    } catch (e: any) {
+      if (e.error) {
+        setError(e.error);
+      } else {
+        setError('An error occurred');
+      }
     }
   };
 
@@ -32,6 +36,7 @@ const SignIn = () => {
           onChangeText={setEmail}
           placeholder="Username"
           style={styles.input}
+          autoCapitalize="none"
         />
         <TextInput
           value={password}

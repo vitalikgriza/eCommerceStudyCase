@@ -1,12 +1,12 @@
 import { ObjectId } from 'mongodb';
-import { getDB } from './db';
+import { products } from './db';
 
 const getAllProducts = async () => {
-  return getDB().products.find().toArray();
+  return products().find().toArray();
 };
 
 const getProductById = async (id: string) => {
-  return getDB().products.findOne({ _id: new ObjectId(id) });
+  return products().findOne({ _id: new ObjectId(id) });
 };
 
 export {
