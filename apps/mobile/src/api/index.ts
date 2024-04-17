@@ -8,7 +8,7 @@ import {
 
 import { CreateOrder } from '@/api/models/CreateOrder';
 import { RootState } from '@/store';
-import { Product } from '@/types';
+import { Order, Product } from '@/types';
 
 const bq = fetchBaseQuery({
   baseUrl: process.env.EXPO_PUBLIC_APP_URL,
@@ -66,11 +66,15 @@ export const api = createApi({
         };
       },
     }),
-    getOrder: build.query<void, string>({
-      query: id => `orders/${id}`,
+    getUserOrders: build.query<Order[], void>({
+      query: () => 'orders',
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductQuery, useCreateOrderMutation, useGetOrderQuery } =
-  api;
+export const {
+  useGetProductsQuery,
+  useGetProductQuery,
+  useCreateOrderMutation,
+  useGetUserOrdersQuery,
+} = api;

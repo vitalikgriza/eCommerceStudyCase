@@ -13,3 +13,11 @@ export type CartItem = {
   size: number;
   quantity: number;
 };
+
+export type Order = {
+  items: string[];
+  total: number;
+  referenceNumber: string;
+  deliveryFee: number;
+  subtotal: number;
+};

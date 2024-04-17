@@ -1,8 +1,8 @@
 import { orders } from './db';
 import {Order} from "../types";
 
-const getUserOrders = async (ref: string, userId: string) => {
-  return orders().findOne({ referenceNumber: ref, userId });
+const getUserOrders = async (userId: string) => {
+  return orders().find({ userId }).toArray();
 }
 
 const createOrder = async (order: Order) => {
