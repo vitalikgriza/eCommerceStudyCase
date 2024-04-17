@@ -22,7 +22,11 @@ export type Product = {
 }
 
 export type Order = {
-  items: string[];
+  items: {
+    product: Pick<Product, 'name' | 'price' | 'image'> & { _id: string };
+    size: number;
+    quantity: number;
+  }[];
   userId: string;
   total: number;
   referenceNumber: string;

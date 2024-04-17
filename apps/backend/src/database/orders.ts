@@ -1,5 +1,5 @@
 import { orders } from './db';
-import {Order} from "../types";
+import { Order } from '../types';
 
 const getUserOrders = async (userId: string) => {
   return orders().find({ userId }).toArray();

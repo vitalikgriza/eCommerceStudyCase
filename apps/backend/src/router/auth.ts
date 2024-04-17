@@ -4,8 +4,9 @@ import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {IResponse} from "../types";
 
-const router = Router();
 const maxAge = 3 * 60 * 60;
+const router = Router();
+
 router.post('/login', async (req: Request<{ email: string; password: string }>, res: IResponse) => {
   const { email, password } = req.body;
   if (!email || !password) {
