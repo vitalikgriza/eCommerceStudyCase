@@ -1,3 +1,4 @@
+import { StripeProvider } from '@stripe/stripe-react-native';
 import { Stack, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { RootSiblingParent } from 'react-native-root-siblings';
@@ -26,11 +27,13 @@ const InitialLayout = () => {
 
 const AppLayout = () => {
   return (
-    <RootSiblingParent>
-      <Provider store={store}>
-        <InitialLayout />
-      </Provider>
-    </RootSiblingParent>
+    <StripeProvider publishableKey={process.env.EXPO_PUBLIC_STRIPE_KEY as string}>
+      <RootSiblingParent>
+        <Provider store={store}>
+          <InitialLayout />
+        </Provider>
+      </RootSiblingParent>
+    </StripeProvider>
   );
 };
 

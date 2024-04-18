@@ -4,7 +4,6 @@ import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {IResponse} from "../types";
 
-const maxAge = 3 * 60 * 60;
 const router = Router();
 
 router.post('/login', async (req: Request<{ email: string; password: string }>, res: IResponse) => {
@@ -24,7 +23,7 @@ router.post('/login', async (req: Request<{ email: string; password: string }>, 
       return res.status(400).json({ status: 'FAILED', error: 'Invalid user or password' });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, { expiresIn: maxAge });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string);
 
     return res.header('auth-token', token).json({ status: 'OK' });
   } catch (e: any) {
@@ -46,7 +45,7 @@ router.post('/register', async (req: Request<{ email: string; password: string }
   try {
     const hashedPassword = await bcryptjs.hash(password, 10);
     const user = await createUser({ name: email, password: hashedPassword });
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, { expiresIn: maxAge });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string);
     return res.header('auth-token', token).json({ status: 'OK' });
   } catch (error: any) {
     return res.status(400).json({ status: "FAILED", error: error.message});

@@ -3,6 +3,7 @@ import express, {Express, NextFunction, Request, Response} from 'express';
 import productsRoutes from './router/products';
 import ordersRoutes from './router/orders';
 import authRoutes from './router/auth';
+import paymentsRoutes from './router/payments';
 import { PORT } from './constants';
 import bodyParser from 'body-parser';
 import { auth } from './middlewares/auth';
@@ -12,6 +13,7 @@ const app: Express = express();
 app.use(bodyParser.json());
 app.use('/products', auth, productsRoutes);
 app.use('/orders', auth, ordersRoutes);
+app.use('/payments', auth, paymentsRoutes);
 app.use('/auth', authRoutes);
 
 app.get('/', (req: Request, res: Response) => {
@@ -26,7 +28,7 @@ app.all('*', (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Global Error Handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response) => {
   err.status = err.status || 'error';
   err.statusCode = err.statusCode || 500;
 

@@ -30,7 +30,7 @@ export const api = createApi({
     if (result.error) {
       return {
         ...result,
-        error: result.error.data,
+        error: result.error.data || result.error,
       } as QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>;
     }
     if (result.data) {
@@ -73,6 +73,13 @@ export const api = createApi({
       query: () => 'orders',
       providesTags: ['Order'],
     }),
+    createPaymentIntent: build.mutation<string, { amount: number }>({
+      query: ({ amount }) => ({
+        url: 'payments/intent',
+        method: 'POST',
+        body: { amount },
+      }),
+    }),
   }),
 });
 
@@ -81,4 +88,5 @@ export const {
   useGetProductQuery,
   useCreateOrderMutation,
   useGetUserOrdersQuery,
+  useCreatePaymentIntentMutation,
 } = api;
