@@ -6,8 +6,7 @@ import OrderCard from '@/components/OrderCard';
 
 const Orders = () => {
   const { data: orders } = useGetUserOrdersQuery();
-
-  if (!orders) {
+  if (!orders?.length) {
     return <Text style={{ textAlign: 'center', marginTop: 48 }}>No Orders</Text>;
   }
 

@@ -1,6 +1,8 @@
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Pressable } from 'react-native';
+
+import styles from './styles';
 
 import { useAppDispatch } from '@/hooks';
 import { loginAction } from '@/store/auth/auth.actions';
@@ -30,7 +32,6 @@ const SignIn = () => {
       <Text style={styles.welcome}>Welcome back</Text>
       <View style={styles.content}>
         <Text style={styles.title}>Sign in</Text>
-
         <TextInput
           value={email}
           onChangeText={setEmail}
@@ -47,40 +48,16 @@ const SignIn = () => {
         />
         <Button title="Sign in" onPress={onSignInPressed} />
         {error && <Text style={{ color: 'red' }}>{error}</Text>}
+        <Link href="/sign-up" asChild>
+          <Pressable style={styles.signUpBtn}>
+            <Text>
+              Don't have an account? <Text style={styles.signUpText}>Sign up</Text>
+            </Text>
+          </Pressable>
+        </Link>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-  },
-  welcome: {
-    marginTop: 120,
-    marginBottom: 64,
-    fontFamily: 'InterSemi',
-    fontSize: 32,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  title: {
-    fontFamily: 'InterSemi',
-    fontSize: 24,
-    color: 'dimgray',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gainsboro',
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: 'white',
-    borderRadius: 5,
-  },
-});
 
 export default SignIn;

@@ -1,4 +1,4 @@
-import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import { type BaseQueryResult, QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import {
   createApi,
   fetchBaseQuery,
@@ -16,7 +16,7 @@ const bq = fetchBaseQuery({
     const token = (getState() as RootState).auth.token;
 
     if (token) {
-      headers.set('auth-token', token);
+      headers.set('Authorization', token);
     }
 
     return headers;
@@ -44,13 +44,19 @@ export const api = createApi({
   },
   tagTypes: ['Product', 'Order'],
   endpoints: build => ({
-    login: build.mutation<string | null, { email: string; password: string }>({
+    login: build.mutation<{ access_token: string }, { email: string; password: string }>({
       query: ({ email, password }) => ({
         url: 'auth/login',
         method: 'POST',
         body: { email, password },
       }),
-      transformResponse: (response, meta) => meta?.response?.headers.get('auth-token') || null,
+    }),
+    register: build.mutation<{ access_token: string }, { email: string; password: string }>({
+      query: ({ email, password }) => ({
+        url: 'auth/register',
+        method: 'POST',
+        body: { email, password },
+      }),
     }),
     getProducts: build.query<Product[], void>({
       query: () => 'products',
@@ -84,6 +90,8 @@ export const api = createApi({
 });
 
 export const {
+  useLoginMutation,
+  useRegisterMutation,
   useGetProductsQuery,
   useGetProductQuery,
   useCreateOrderMutation,

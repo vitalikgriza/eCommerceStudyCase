@@ -6,7 +6,7 @@ import {IResponse} from "../types";
 
 const router = Router();
 
-router.post('/login', async (req: Request<{ email: string; password: string }>, res: IResponse) => {
+router.post('/login', async (req: Request<{ email: string; password: string }>, res: IResponse<{ access_token: string }>) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ status: 'FAILED', error: 'Email and password are required' });
@@ -25,7 +25,7 @@ router.post('/login', async (req: Request<{ email: string; password: string }>, 
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string);
 
-    return res.header('auth-token', token).json({ status: 'OK' });
+    return res.json({ status: 'OK', data: { access_token: token }  });
   } catch (e: any) {
     return res.status(400).json({ status: 'FAILED', error: e.message });
   }
@@ -46,7 +46,7 @@ router.post('/register', async (req: Request<{ email: string; password: string }
     const hashedPassword = await bcryptjs.hash(password, 10);
     const user = await createUser({ name: email, password: hashedPassword });
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string);
-    return res.header('auth-token', token).json({ status: 'OK' });
+    return res.json({ status: 'OK', data: { access_token: token } });
   } catch (error: any) {
     return res.status(400).json({ status: "FAILED", error: error.message});
   }

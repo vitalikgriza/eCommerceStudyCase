@@ -63,7 +63,6 @@ const ShoppingCart = () => {
     }
 
     const paymentResp = await presentPaymentSheet();
-    console.log(paymentResp);
     if (paymentResp.error) {
       if (paymentResp.error.code !== 'Canceled') {
         showError('Failed to process payment');
